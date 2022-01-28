@@ -4,10 +4,10 @@ const { Thought, User } = require('../models')
 // Get all users
 const getAllUsers = async(req, res) => {
     try {
-        const getAllUsers = await User.find()
+        const allUsers = await User.find()
             .populate('thoughts')
             .populate('friends')
-        res.json(getAllUsers)
+        res.json(allUsers)
     } catch (err) {
         console.log(err)
         res.status(500).json(err)
@@ -17,10 +17,10 @@ const getAllUsers = async(req, res) => {
 // Get one user by ID
 const getOneUser = async(req, res) => {
     try {
-        const getOneUser = await User.findOne({ _id: req.params.userId })
+        const oneUser = await User.findOne({ _id: req.params.id })
             .populate('thoughts')
             .populate('friends')
-        res.json(getOneUser)
+        res.json(oneUser)
     } catch (err) {
         console.log(err)
         res.status(500).json(err)
@@ -30,8 +30,8 @@ const getOneUser = async(req, res) => {
 // Post new user
 const newUser = async(req, res) => {
     try {
-        const newUser = await User.create(req.body)
-        res.json(newUser)
+        const user = await User.create(req.body)
+        res.json(user)
     } catch (err) {
         console.log(err)
         res.status(500).json(err)
@@ -41,11 +41,11 @@ const newUser = async(req, res) => {
 // Update user by ID
 const updateUser = async(req, res) => {
     try {
-        const updateUser = await User.findOne({
-                _id: req.params.userId
+        const updatedUser = await User.findOne({
+                _id: req.params.id
             },
             req.body)
-        res.json(updateUser)
+        res.json(updatedUser)
     } catch (err) {
         console.log(err)
         res.status(500).json(err)
@@ -55,10 +55,10 @@ const updateUser = async(req, res) => {
 // Delete User by ID
 const deleteUser = async(req, res) => {
     try {
-        const deleteUser = await User.findOneandDelete({
-            _id: req.params.userId
+        const user = await User.findOneandDelete({
+            _id: req.params.id
         })
-        res.json(deleteUser)
+        res.json(user)
     } catch (err) {
         console.log(err)
         res.status(500).json(err)
@@ -68,12 +68,10 @@ const deleteUser = async(req, res) => {
 // Add a new friend to a user's friend list
 const addFriend = async(req, res) => {
     try {
-        const addFriend = await User.findOneAndUpdate({
-            _id: params.userId
-        }, {
-            friends: params.friendId
-        })
-        res.json(addFriend)
+        const friend = await User.findOneAndUpdate({
+            _id: req.params.id
+        }, { $push: { friends: req.params.friendId } })
+        res.json(friend)
     } catch (err) {
         console.log(err)
         res.status(500).json(err)
@@ -83,12 +81,10 @@ const addFriend = async(req, res) => {
 // Delete Friend
 const deleteFriend = async(req, res) => {
     try {
-        const deleteFriend = await User.findOneAndDelete({
-            _id: params.userId
-        }, {
-            friends: params.friendId
-        })
-        res.json(deleteFriend)
+        const friend = await User.findOneAndDelete({
+            _id: req.params.id
+        }, { $pull: { friends: req.params.friendId } })
+        res.json(friend)
     } catch (err) {
         console.log(err)
         res.status(500).json(err)
