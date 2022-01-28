@@ -13,12 +13,15 @@ const {
 router.route('/').get(getAllUsers).post(newUser);
 
 // /api/users/:userId
+router.route('/:userId').get(getOneUser).update(updateUser);
+
+// /api/users/:userId
 router.route('/:userId').get(getOneUser).delete(deleteUser);
 
 // /api/users/:userId/friends
 router.route('/:userId/friends').post(addFriend);
 
 // /api/users/:userId/friends/:friendId
-router.route('/:userId/friends/:friendId').delete(removeFriend);
+router.route('/:userId/friends/:friendId').delete(deleteFriend);
 
 module.exports = router;
