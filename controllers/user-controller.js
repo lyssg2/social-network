@@ -20,6 +20,9 @@ const getOneUser = async(req, res) => {
         const oneUser = await User.findOne({ _id: req.params.id })
             .populate('thoughts')
             .populate('friends')
+        if (!oneUser) {
+            res.status(404).json({ message: 'User not found!' })
+        }
         res.json(oneUser)
     } catch (err) {
         console.log(err)
