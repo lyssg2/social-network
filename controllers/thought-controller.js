@@ -51,7 +51,7 @@ const updateThought = async(req, res) => {
 // Delete thought by ID
 const deleteThought = async(req, res) => {
     try {
-        const thought = await Thought.findOneandDelete({
+        const thought = await Thought.findOneAndDelete({
             _id: req.params.thoughtId
         })
         res.json(thought)
