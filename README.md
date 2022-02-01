@@ -1,6 +1,6 @@
 # social-network
 
-The purpose of this project was to create the back-end for a typical social media app using Express.js and MongoDB.
+The purpose of this project was to create the back-end for a typical social network app using Express.js and MongoDB.
 
 ## Table of Contents
   
@@ -31,7 +31,11 @@ Through Insomnia, a user can be guided through the back-end of a social network 
 
 For a video walkthrough, watch below!
 
-<iframe src="https://drive.google.com/file/d/1pbHM4_yY7xkyFXTHxwj9iK7OHgEWjGpw/preview" width="640" height="480"></iframe>
+
+
+https://user-images.githubusercontent.com/89744530/151900967-832c124b-9cb3-41ed-8a02-67b36ce7c062.mp4
+
+
 
 ## Help
 Please contact me if there are any issues!
